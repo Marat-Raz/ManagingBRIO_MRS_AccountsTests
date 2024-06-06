@@ -2,13 +2,11 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import static org.openqa.selenium.Keys.ENTER;
 import static pages.CommonLocatorsUrls.*;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -76,12 +74,16 @@ public class CreatingNewAccountPage {
         return driver.findElement(INPUT_BRIO_USERNAME).isDisplayed()&driver.findElement(INPUT_BRIO_USERNAME).isDisplayed();
     }
     @Step("Появилась ошибка с текстом «The ... field is required.»")
-    public String alertIsDisplayed() {
+    public String alertIsDisplayedReturnString() {
         return driver.findElement(ALERT).getText();
     }
     @Step("Появилась кнопка закрыть «Х»")
     public boolean alertButtonCloseIsDisplayed() {
-        return driver.findElement(BUTTON_CLOSE).isDisplayed();
+        return driver.findElement(BUTTON_X).isDisplayed();
+    }
+    @Step("Появилась кнопка закрыть «Х»")
+    public boolean alertIsDisplayed() {
+        return driver.findElement(ALERT).isEnabled();
     }
     @Step("Заполнение данных пользователя")
     public void InputAllText(User user) {
@@ -96,11 +98,15 @@ public class CreatingNewAccountPage {
     }
     @Step("Нажать на кнопку «X»")
     public void clickButtonX() {
-        driver.findElement(BUTTON_CANCEL).click();
+        driver.findElement(BUTTON_X).click();
     }
     @Step("Заполнение полей ввода на странице «Регистрация» и нажатие кнопки «Зарегистрироваться»")
     public void enterRegistrationDataAndClickCreateButton(User user) {
         InputAllText(user);
         clickButtonCreate();
+    }
+    @Step("Нажать на кнопку «Отмена»")
+    public void clickButtonCancel() {
+        driver.findElement(BUTTON_CANCEL).click();
     }
 }

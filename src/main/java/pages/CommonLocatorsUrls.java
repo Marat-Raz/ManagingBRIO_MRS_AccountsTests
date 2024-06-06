@@ -20,7 +20,7 @@ public class CommonLocatorsUrls {
     //Страница Создание нового аккаунта
     public static final By H1_CREATING_NEW_ACCOUNT = By.xpath("//h1[contains(text(),'Создание нового аккаунта')]");
     public static final By ALERT = By.xpath("//div[@role='alert']");
-    public static final By BUTTON_CLOSE = By.xpath("//button[@aria-label='Close']");
+    public static final By BUTTON_X = By.xpath("//button[@aria-label='Close']");
     public static final By SELECT_MENU = By.xpath("//select[@name='Account.ConnectionTypeId']");
     public static final By ELEMENT_LOCAL = By.xpath("//select[@class='form-select']/option[@value='']");
     public static final By ELEMENT_GOOGLE_DRIVE = By.xpath("//select[@class='form-select']/option[@value=15]");
@@ -35,6 +35,7 @@ public class CommonLocatorsUrls {
     public static final By INPUT_YANDEX_TOKEN = By.xpath("//input[@name='Account.AuthFieldValues[token]']");
     public static final By INPUT_BRIO_USERNAME = By.xpath("//input[@name='Account.AuthFieldValues[Username]']");
     public static final By INPUT_BRIO_PASSWORD = By.xpath("//input[@name='Account.AuthFieldValues[Password]']");
+    //public static final By BUTTON_X = By.className("button.btn-close");
     public static final By BUTTON_CREATE = By.xpath("//button[contains(text(),'Создать')]");
     public static final By BUTTON_CANCEL = By.xpath("//a[contains(text(),'Отмена')]");
     public static final By AUTHENTICATION_PARAMETERS = By.xpath("//h3[contains(text(),'Параметры аутентификации')]");
