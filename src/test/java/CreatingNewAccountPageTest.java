@@ -6,12 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.AccountManagementPage;
 import pages.CreatingNewAccountPage;
-import usermodel.User;
 
-import java.util.Optional;
-
-import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.*;
 import static pages.CommonLocatorsUrls.*;
 
@@ -33,7 +28,6 @@ public class CreatingNewAccountPageTest extends StartTest {
     @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-697")
     public void selectAccountTypeLocalTest() {
         String actText = creatingNewAccountPage.selectTextIsSelected("Локальный");
-        //Thread.sleep(1000);
             assertEquals("Локальный", actText, "Ошибка! Выбранный текст не соответствует ожидаемому");
     }
     @Test
@@ -105,7 +99,7 @@ public class CreatingNewAccountPageTest extends StartTest {
         creatingNewAccountPage.inputText(INPUT_LOGIN, TEXT_TO_ENTER_INPUT);
         creatingNewAccountPage.inputText(INPUT_PASSWORD, TEXT_TO_ENTER_INPUT);
         creatingNewAccountPage.clickButtonCreate();
-        String actText = creatingNewAccountPage.alertIsDisplayed();
+        String actText = creatingNewAccountPage.alertIsDisplayedReturnString();
             assertEquals("The Name field is required.", actText,
                     "Ошибка! Отображаемый текст не соответствует ожидаемому");
             assertTrue(creatingNewAccountPage.alertButtonCloseIsDisplayed(), "Ошибка! Кнопка отсутствует");
@@ -119,7 +113,7 @@ public class CreatingNewAccountPageTest extends StartTest {
         creatingNewAccountPage.inputText(INPUT_LOGIN, " ");
         creatingNewAccountPage.inputText(INPUT_PASSWORD, TEXT_TO_ENTER_INPUT);
         creatingNewAccountPage.clickButtonCreate();
-        String actText = creatingNewAccountPage.alertIsDisplayed();
+        String actText = creatingNewAccountPage.alertIsDisplayedReturnString();
             assertEquals("The Login field is required.", actText,
                     "Ошибка! Отображаемый текст не соответствует ожидаемому");
             assertTrue(creatingNewAccountPage.alertButtonCloseIsDisplayed(), "Ошибка! Кнопка отсутствует");
@@ -133,7 +127,7 @@ public class CreatingNewAccountPageTest extends StartTest {
         creatingNewAccountPage.inputText(INPUT_LOGIN, TEXT_TO_ENTER_INPUT);
         creatingNewAccountPage.inputText(INPUT_PASSWORD, " ");
         creatingNewAccountPage.clickButtonCreate();
-        String actText = creatingNewAccountPage.alertIsDisplayed();
+        String actText = creatingNewAccountPage.alertIsDisplayedReturnString();
             assertEquals("The Password field is required.", actText,
                     "Ошибка! Отображаемый текст не соответствует ожидаемому");
             assertTrue(creatingNewAccountPage.alertButtonCloseIsDisplayed(), "Ошибка! Кнопка отсутствует");
@@ -151,6 +145,24 @@ public class CreatingNewAccountPageTest extends StartTest {
         ValidatableResponse getResponse = userClient.getUserByLogin(user.getLogin());
         int id = getResponse.extract().path("id.id");
         userClient.deleteUser(id);
+    }
+    @Test
+    @DisplayName("Нажать на кнопку «Отмена»")
+    @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-706")
+    public void clickCancelButtonTest() {
+        creatingNewAccountPage.clickButtonCancel();
+        accountManagementPage = new AccountManagementPage(driver);
+        accountManagementPage.waitOpenPage();
+            assertTrue(accountManagementPage.pageIsOpen());
+    }
+    @Test
+    @DisplayName("Нажать на кнопку «X»")
+    @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-715")
+    public void clickXButtonTest() {
+        creatingNewAccountPage.inputText(INPUT_NAME, " ");
+        creatingNewAccountPage.clickButtonCreate();
+        creatingNewAccountPage.clickButtonX();
+            assertFalse(creatingNewAccountPage.alertIsNotDisplayed(), "Ошибка!");
     }
 
 }
