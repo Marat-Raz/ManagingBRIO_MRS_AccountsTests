@@ -28,7 +28,6 @@ public class CreatingNewAccountPageTest extends StartTest {
     @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-697")
     public void selectAccountTypeLocalTest() {
         String actText = creatingNewAccountPage.selectTextIsSelected("Локальный");
-        //Thread.sleep(1000);
             assertEquals("Локальный", actText, "Ошибка! Выбранный текст не соответствует ожидаемому");
     }
     @Test
@@ -156,17 +155,14 @@ public class CreatingNewAccountPageTest extends StartTest {
         accountManagementPage.waitOpenPage();
             assertTrue(accountManagementPage.pageIsOpen());
     }
-/*    @Test
+    @Test
     @DisplayName("Нажать на кнопку «X»")
     @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-715")
-    public void clickXButtonTest() throws InterruptedException {
+    public void clickXButtonTest() {
         creatingNewAccountPage.inputText(INPUT_NAME, " ");
         creatingNewAccountPage.clickButtonCreate();
         creatingNewAccountPage.clickButtonX();
-        //driver.navigate().refresh();
-        Thread.sleep(2000);
-        boolean x = creatingNewAccountPage.alertIsDisplayed();
-            assertFalse(x, "Ошибка!");
-    }*/
+            assertFalse(creatingNewAccountPage.alertIsNotDisplayed(), "Ошибка!");
+    }
 
 }
