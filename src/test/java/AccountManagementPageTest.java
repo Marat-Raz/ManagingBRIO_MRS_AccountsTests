@@ -11,16 +11,12 @@ import pages.DeletingAccountPage;
 
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccountManagementPageTest extends StartTest {
     private AccountManagementPage accountManagementPage;
-    //ValidatableResponse response;
     private int statusCodeOfCreateUser, statusCodeOfDeleteUser;
-
-    //private int id;
 
     @BeforeEach
     @Step("Открытие страницы «Управление аккаунтами BRIO MRS»")
@@ -59,13 +55,12 @@ public class AccountManagementPageTest extends StartTest {
     public void clickDeleteButtonTest() {
         accountManagementPage.clickDelete("local");
         DeletingAccountPage deletingAccountPage = new DeletingAccountPage(driver);
-            assertTrue(deletingAccountPage.pageIsOpen(), "Ошибка!");
+            assertTrue(deletingAccountPage.pageIsOpen(101), "Ошибка!");
     }
     @Test
     @DisplayName("Новые пользователи отображаются в таблице пользователей") //Данный тест-кейс отсутствует в репозитории Qase
     // Современем необходимо удалить тест или, хотя бы, строку удаления пользователя
     public void authorizationByLoginButtonTest() throws InterruptedException {
-
         statusCodeOfCreateUser = response.extract().statusCode();
         driver.navigate().refresh();
         Thread.sleep(3000);

@@ -1,7 +1,6 @@
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import pages.CreatingNewAccountPage;
 import static org.junit.jupiter.api.Assertions.*;
 import static pages.CommonLocatorsUrls.*;
 
-public class CreatingNewAccountPageTest extends StartTest {
+public class CreatingNewAccountPageTests extends StartTest {
     private AccountManagementPage accountManagementPage;
     private CreatingNewAccountPage creatingNewAccountPage;
     String actText;

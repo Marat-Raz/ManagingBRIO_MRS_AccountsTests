@@ -7,7 +7,7 @@ public class CommonLocatorsUrls {
     public static final String MAIN_PAGE_URL = "http://localhost:5000/pages/Accounts/Index";
     public static final String CREATING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Create";
     public static final String CHANGING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Edit/";
-    public static final String DELETING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Delete/101";
+    public static final String DELETING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Delete/";
 
     public static final By H1_CHANGING_ACCOUNT = By.xpath("//h1[contains(text(),'Изменение аккаунта')]");
     public static final By H1_DELETING_ACCOUNT = By.xpath("//h1[contains(text(),'Удаление аккаунта')]");
@@ -40,11 +40,9 @@ public class CommonLocatorsUrls {
     //Страница Изменение аккаунта
     public static final By BUTTON_SAVE = By.xpath("//button[contains(text(),'Сохранить')]");
 
+    //Страница Изменение аккаунта
 
-
-
-
-
+    public static final By BUTTON_DELETE = By.xpath("//button[contains(text(),'Удалить')]");
 
 
 }

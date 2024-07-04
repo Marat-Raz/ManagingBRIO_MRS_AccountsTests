@@ -17,7 +17,7 @@ public class ChangingAccountPage {
     public ChangingAccountPage(WebDriver driver) {
         this.driver = driver;
     }
-    @Step("Открываем главную страницу")
+    @Step("Открываем страницу «Изменение аккаунта»")
     public void openPageById(int id) {
         driver.get(CHANGING_ACCOUNT_PAGE_URL + id);
         driver.manage().window().maximize();
