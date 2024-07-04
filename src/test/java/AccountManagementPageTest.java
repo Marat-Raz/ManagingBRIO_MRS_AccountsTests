@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccountManagementPageTest extends StartTest {
     private AccountManagementPage accountManagementPage;
-    ValidatableResponse response;
+    //ValidatableResponse response;
     private int statusCodeOfCreateUser, statusCodeOfDeleteUser;
 
-    private int id;
+    //private int id;
 
     @BeforeEach
     @Step("Открытие страницы «Управление аккаунтами BRIO MRS»")
@@ -63,10 +63,9 @@ public class AccountManagementPageTest extends StartTest {
     }
     @Test
     @DisplayName("Новые пользователи отображаются в таблице пользователей") //Данный тест-кейс отсутствует в репозитории Qase
+    // Современем необходимо удалить тест или, хотя бы, строку удаления пользователя
     public void authorizationByLoginButtonTest() throws InterruptedException {
 
-        response = userClient.createUser(user);
-        id = response.extract().path("id");
         statusCodeOfCreateUser = response.extract().statusCode();
         driver.navigate().refresh();
         Thread.sleep(3000);

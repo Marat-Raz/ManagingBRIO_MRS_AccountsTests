@@ -19,8 +19,11 @@ public class ChangingAccountPage {
         this.driver = driver;
     }
     @Step("Открываем главную страницу")
-    public void waitOpenPage() {
-        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(ExpectedConditions.urlToBe(CHANGING_ACCOUNT_PAGE_URL));
+    public void openPageById(int id) {
+        driver.get(CHANGING_ACCOUNT_PAGE_URL + id);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(ExpectedConditions.urlToBe(CHANGING_ACCOUNT_PAGE_URL + id));
     }
     public boolean pageIsOpen() {
         return driver.findElement(H1_CHANGING_ACCOUNT).isDisplayed();

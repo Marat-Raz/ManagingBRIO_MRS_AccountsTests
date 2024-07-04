@@ -1,6 +1,7 @@
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

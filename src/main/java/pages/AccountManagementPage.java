@@ -49,5 +49,8 @@ public class AccountManagementPage {
     public boolean findLogin(String login) {
     return driver.findElement(By.xpath("//tbody//td[text()='" + login + "']")).isDisplayed();
     }
+    public void clickEdit(String login) {
+        driver.findElement(By.xpath(String.format("//tr[.//td='%s']//a[.='Удалить']", login))).click(); //" + login + "
 
+    }
 }

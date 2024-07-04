@@ -6,7 +6,7 @@ public class CommonLocatorsUrls {
     //URLs
     public static final String MAIN_PAGE_URL = "http://localhost:5000/pages/Accounts/Index";
     public static final String CREATING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Create";
-    public static final String CHANGING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Edit/101";
+    public static final String CHANGING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Edit/";
     public static final String DELETING_ACCOUNT_PAGE_URL = "http://localhost:5000/pages/Accounts/Delete/101";
 
     public static final By H1_CHANGING_ACCOUNT = By.xpath("//h1[contains(text(),'Изменение аккаунта')]");
