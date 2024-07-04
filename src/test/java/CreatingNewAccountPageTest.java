@@ -150,6 +150,21 @@ public class CreatingNewAccountPageTest extends StartTest {
             assertTrue(creatingNewAccountPage.alertButtonCloseIsDisplayed(), "Ошибка! Кнопка отсутствует");
     }
     @Test
+    @DisplayName("Ввод двух символов в поле «Логин»")
+    @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-704")
+    public void enterЕwoСharactersInLoginFieldAndClickCreateTest() {
+        creatingNewAccountPage.selectText("Локальный");
+        creatingNewAccountPage.inputText(INPUT_NAME, TEXT_TO_ENTER_INPUT);
+        creatingNewAccountPage.inputText(INPUT_LOGIN, "ab");
+        creatingNewAccountPage.inputText(INPUT_PASSWORD, TEXT_TO_ENTER_INPUT);
+        creatingNewAccountPage.clickButtonCreate();
+        actText = creatingNewAccountPage.alertIsDisplayedReturnString();
+        assertEquals("The field Login must be a string with a minimum length of 3 and a maximum length of 60.",
+                actText,
+                "Ошибка! Отображаемый текст не соответствует ожидаемому");
+        assertTrue(creatingNewAccountPage.alertButtonCloseIsDisplayed(), "Ошибка! Кнопка отсутствует");
+    }
+    @Test
     @DisplayName("Ввод пробела в поле «Пароль»")
     @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-703")
     public void enterWhitespaceInPasswordFieldAndClickCreateTest() {

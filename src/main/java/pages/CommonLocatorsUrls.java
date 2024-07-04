@@ -21,14 +21,14 @@ public class CommonLocatorsUrls {
 
     //Страница Создание нового аккаунта
     public static final By H1_CREATING_NEW_ACCOUNT = By.xpath("//h1[contains(text(),'Создание нового аккаунта')]");
-    public static final By ALERT = By.xpath("//div[@role='alert']");
-    public static final By BUTTON_X = By.xpath("//button[@aria-label='Close']");
+    public static final By ALERT = By.xpath("//div[@role='alert']"); //+Страница Изменение аккаунта
+    public static final By BUTTON_X = By.xpath("//button[@aria-label='Close']"); //+Страница Изменение аккаунта
     public static final By SELECT_MENU = By.xpath("//select[@name='Account.ConnectionTypeId']");
     public static String TEXT_TO_ENTER_INPUT = "sfgbfg541246@#!$%$^&**()__+=впаыиапиВРЖРАОJKFJJ\\|/[]{},.*-+ 123456789";
     public static String EXP_TEXT = TEXT_TO_ENTER_INPUT.substring(0,60);
-    public static final By INPUT_NAME = By.xpath("//input[@name='Account.Name']"); //+Страница Изменение аккаунта
+    public static final By INPUT_NAME = By.id("inputName"); //+Страница Изменение аккаунта
     public static final By INPUT_LOGIN = By.id("inputLogin"); //+Страница Изменение аккаунта
-    public static final By INPUT_PASSWORD = By.xpath("//input[@name='Account.Password']"); //+Страница Изменение аккаунта
+    public static final By INPUT_PASSWORD = By.id("inputPassword"); //+Страница Изменение аккаунта
     public static final By INPUT_GOOGLE_USER = By.id("Account_AuthFieldValues_user_"); //+Страница Изменение аккаунта
     public static final By INPUT_YANDEX_TOKEN = By.xpath("//input[@name='Account.AuthFieldValues[token]']"); //+Страница Изменение аккаунта
     public static final By INPUT_BRIO_USERNAME = By.xpath("//input[@name='Account.AuthFieldValues[Username]']"); //+Страница Изменение аккаунта

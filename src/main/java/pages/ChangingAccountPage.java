@@ -2,7 +2,6 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +31,6 @@ public class ChangingAccountPage {
     public void inputText(By input, String variableText) {
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(variableText);
-        driver.findElement(input).sendKeys(Keys.TAB);
     }
     @Step("Чтение текста из поля ввода")
     public String textFromInput(By input) {
@@ -42,20 +40,8 @@ public class ChangingAccountPage {
     public boolean authenticationParametersIsDisplayed() {
         return driver.findElement(AUTHENTICATION_PARAMETERS).isDisplayed();
     }
-    @Step("Поле ввода «user» под «Параметры аутентификации» видно?")
-    public boolean inputGoogleUserIsDisplayed() {
-        return driver.findElement(INPUT_GOOGLE_USER).isDisplayed();
-    }
-    @Step("Поле ввода «token» под «Параметры аутентификации» видно?")
-    public boolean inputYandexTokenIsDisplayed() {
-        return driver.findElement(INPUT_YANDEX_TOKEN).isDisplayed();
-    }
-    @Step("Поля ввода «Username» и «Password» под «Параметры аутентификации» видно?")
-    public boolean inputBrioUsernameAndPasswordIsDisplayed() {
-        return driver.findElement(INPUT_BRIO_USERNAME).isDisplayed()&driver.findElement(INPUT_BRIO_USERNAME).isDisplayed();
-    }
     @Step("Заполнение данных пользователя")
-    public void InputAllText(User user) {
+    public void inputAllText(User user) {
         inputText(INPUT_NAME, user.getName());
         inputText(INPUT_LOGIN, user.getLogin());
         inputText(INPUT_PASSWORD, user.getPassword());
@@ -65,12 +51,30 @@ public class ChangingAccountPage {
         driver.findElement(BUTTON_SAVE).click();
     }
     @Step("Заполнение полей ввода на странице «Изменение аккаунта» и нажатие кнопки «Сохранить»")
-    public void enterRegistrationDataAndClickCreateButton(User user) {
-        InputAllText(user);
+    public void enterNewUserDataAndClickSaveButton(User user) {
+        inputAllText(user);
         clickButtonSave();
     }
     @Step("Нажать на кнопку «Отмена»")
     public void clickButtonCancel() {
         driver.findElement(BUTTON_CANCEL).click();
+    }
+    @Step("Появилась ошибка с текстом «The ... field is required.»")
+    public String alertIsDisplayedReturnString() {
+        return driver.findElement(ALERT).getText();
+    }
+    @Step("Появилась кнопка закрыть «Х»")
+    public boolean alertButtonCloseIsDisplayed() {
+        return driver.findElement(BUTTON_X).isDisplayed();
+    }
+    @Step("Нажать на кнопку «X»")
+    public void clickButtonX() {
+        driver.findElement(BUTTON_X).click();
+    }
+    public boolean alertIsNotDisplayed() {
+        return assertElementPresent(ALERT);
+    }
+    private boolean assertElementPresent(By alert) {
+        return false;
     }
 }
