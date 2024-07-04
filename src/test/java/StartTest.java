@@ -24,9 +24,10 @@ public class StartTest {
     User user;
     UserClient userClient;
     WebDriver driver;
-    static Process brioDocs = null;
+    static Process brioDocsApi = null;
 
     @BeforeAll
+    @Step("Глобальные настройки и запуск Brio.Docs.Api.exe")
     public static void globalSetUp() {
         RestAssured.filters(
                 new RequestLoggingFilter(), new ResponseLoggingFilter(),
@@ -34,7 +35,7 @@ public class StartTest {
         ProcessBuilder pb = new ProcessBuilder("C:\\Program Files\\BRIO MRS\\BRIO MRS 2.x\\DocumentManagement\\Brio.Docs.Api.exe");
         pb.directory(new File("C:\\Program Files\\BRIO MRS\\BRIO MRS 2.x\\DocumentManagement"));
         try {
-            brioDocs = pb.start();
+            brioDocsApi = pb.start();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -53,9 +54,9 @@ public class StartTest {
         userClient = new UserClient();    }
 
     @AfterAll
-    @Step
+    @Step("Закрытие Brio.Docs.Api.exe")
     public static void closeBrioDocs() {
-        brioDocs.destroy();
+        brioDocsApi.destroy();
     }
 
     @AfterEach

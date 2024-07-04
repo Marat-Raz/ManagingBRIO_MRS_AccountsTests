@@ -4,31 +4,26 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-
-import static pages.CommonLocatorsUrls.*;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
 import usermodel.User;
 
 import java.time.Duration;
 
+import static pages.CommonLocatorsUrls.*;
 
-public class CreatingNewAccountPage {
+public class ChangingAccountPage {
     private final WebDriver driver;
 
-
-    public CreatingNewAccountPage(WebDriver driver) {
+    public ChangingAccountPage(WebDriver driver) {
         this.driver = driver;
     }
-    @Step("Открываем страницу cсоздания пользователя")
+    @Step("Открываем главную страницу")
     public void waitOpenPage() {
-        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(ExpectedConditions.urlToBe(CREATING_ACCOUNT_PAGE_URL));
+        (new WebDriverWait(driver, Duration.ofSeconds(3))).until(ExpectedConditions.urlToBe(CHANGING_ACCOUNT_PAGE_URL));
     }
     public boolean pageIsOpen() {
-        return driver.findElement(H1_CREATING_NEW_ACCOUNT).isDisplayed();
+        return driver.findElement(H1_CHANGING_ACCOUNT).isDisplayed();
     }
     @Step("Ввод текста в поле ввода")
     public void inputText(By input, String variableText) {
@@ -39,20 +34,6 @@ public class CreatingNewAccountPage {
     @Step("Чтение текста из поля ввода")
     public String textFromInput(By input) {
         return driver.findElement(input).getAttribute("value");
-    }
-    @Step("Выбор элемента выпадающего списка")
-    public void selectText(String variableTextForSelect) {
-        WebElement selectElement = driver.findElement(SELECT_MENU);
-        Select select = new Select(selectElement);
-        select.selectByVisibleText(variableTextForSelect);
-    }
-    @Step("Выбор элемента выпадающего списка и возврат статуса выбран элемент или нет")
-    public String selectTextIsSelected(String variableTextForSelect) {
-        WebElement selectElement = driver.findElement(SELECT_MENU);
-        Select select = new Select(selectElement);
-        select.selectByVisibleText(variableTextForSelect);
-        select.getFirstSelectedOption();
-        return select.getFirstSelectedOption().getText();
     }
     @Step("Параметры аутентификации видны или нет?")
     public boolean authenticationParametersIsDisplayed() {
@@ -70,46 +51,23 @@ public class CreatingNewAccountPage {
     public boolean inputBrioUsernameAndPasswordIsDisplayed() {
         return driver.findElement(INPUT_BRIO_USERNAME).isDisplayed()&driver.findElement(INPUT_BRIO_USERNAME).isDisplayed();
     }
-    @Step("Появилась ошибка с текстом «The ... field is required.»")
-    public String alertIsDisplayedReturnString() {
-        return driver.findElement(ALERT).getText();
-    }
-    @Step("Появилась кнопка закрыть «Х»")
-    public boolean alertButtonCloseIsDisplayed() {
-        return driver.findElement(BUTTON_X).isDisplayed();
-    }
-    public boolean alertIsNotDisplayed() {
-        return assertElementPresent(ALERT);
-    }
-
-    private boolean assertElementPresent(By alert) {
-        return false;
-    }
-
     @Step("Заполнение данных пользователя")
     public void InputAllText(User user) {
-        selectText("Локальный");
         inputText(INPUT_NAME, user.getName());
         inputText(INPUT_LOGIN, user.getLogin());
         inputText(INPUT_PASSWORD, user.getPassword());
     }
-    @Step("Нажать на кнопку «Создать»")
-    public void clickButtonCreate() {
-        driver.findElement(BUTTON_CREATE).click();
+    @Step("Нажать на кнопку «Сохранить»")
+    public void clickButtonSave() {
+        driver.findElement(BUTTON_SAVE).click();
     }
-    @Step("Нажать на кнопку «X»")
-    public void clickButtonX() {
-        driver.findElement(BUTTON_X).click();
-    }
-    @Step("Заполнение полей ввода на странице «Создание нового аккаунта» и нажатие кнопки «Создать»")
+    @Step("Заполнение полей ввода на странице «Изменение аккаунта» и нажатие кнопки «Сохранить»")
     public void enterRegistrationDataAndClickCreateButton(User user) {
         InputAllText(user);
-        clickButtonCreate();
+        clickButtonSave();
     }
     @Step("Нажать на кнопку «Отмена»")
     public void clickButtonCancel() {
         driver.findElement(BUTTON_CANCEL).click();
     }
 }
-
-
