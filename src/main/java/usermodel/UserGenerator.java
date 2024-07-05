@@ -11,8 +11,8 @@ public class UserGenerator {
         return new User(name, login, password);
     }
 
-    public static User getUserWithIncorrectPassFive() {
-        return new User("string" + "@yandex.ru", RandomStringUtils.randomAlphabetic(5), "name");
+    public static User getNewUser() {
+        return new User(name+1, login+2, password+3);
     }
 
 }

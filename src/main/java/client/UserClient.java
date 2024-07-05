@@ -58,4 +58,12 @@ public class UserClient extends Client {
                 .get(USER + "find?login=" + login)
                 .then();
     }
+    @Step("Получить пользователя по его id")
+    public ValidatableResponse getUserById(int id) {
+        return given()
+                .spec(getBaseSpec())
+                .when()
+                .get(USER + id)
+                .then();
+    }
 }

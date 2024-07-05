@@ -1,30 +1,22 @@
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
-import io.restassured.response.ResponseBodyExtractionOptions;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.AccountManagementPage;
-import pages.ChangingAccount;
+import pages.ChangingAccountPage;
 import pages.CreatingNewAccountPage;
 import pages.DeletingAccountPage;
-import usermodel.UserCredentials;
-
-import java.util.function.BooleanSupplier;
 
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccountManagementPageTest extends StartTest {
     private AccountManagementPage accountManagementPage;
-    ValidatableResponse response;
     private int statusCodeOfCreateUser, statusCodeOfDeleteUser;
-
-    private int id;
 
     @BeforeEach
     @Step("Открытие страницы «Управление аккаунтами BRIO MRS»")
@@ -54,7 +46,7 @@ public class AccountManagementPageTest extends StartTest {
     @Link(name = "Ссылка на тест-кейс", url = "https://app.qase.io/case/MRS-698")
     public void clickChangeButtonTest() {
         accountManagementPage.clickChange();
-        ChangingAccount changingAccount = new ChangingAccount(driver);
+        ChangingAccountPage changingAccount = new ChangingAccountPage(driver);
             assertTrue(changingAccount.pageIsOpen(), "Ошибка!");
     }
     @Test
@@ -63,14 +55,12 @@ public class AccountManagementPageTest extends StartTest {
     public void clickDeleteButtonTest() {
         accountManagementPage.clickDelete("local");
         DeletingAccountPage deletingAccountPage = new DeletingAccountPage(driver);
-            assertTrue(deletingAccountPage.pageIsOpen(), "Ошибка!");
+            assertTrue(deletingAccountPage.pageIsOpen(101), "Ошибка!");
     }
     @Test
-    @DisplayName("«» ")
+    @DisplayName("Новые пользователи отображаются в таблице пользователей") //Данный тест-кейс отсутствует в репозитории Qase
+    // Современем необходимо удалить тест или, хотя бы, строку удаления пользователя
     public void authorizationByLoginButtonTest() throws InterruptedException {
-
-        response = userClient.createUser(user);
-        id = response.extract().path("id");
         statusCodeOfCreateUser = response.extract().statusCode();
         driver.navigate().refresh();
         Thread.sleep(3000);
@@ -79,12 +69,8 @@ public class AccountManagementPageTest extends StartTest {
         boolean isSuccess = Boolean.parseBoolean(deleteResponse.extract().asString());
         driver.navigate().refresh();
         Thread.sleep(3000);
-
-
-        //System.out.println(isSuccess);
-
-        assertEquals(SC_CREATED, statusCodeOfCreateUser);
-        assertEquals(SC_OK, statusCodeOfDeleteUser);
-        assertTrue(isSuccess);
+            assertEquals(SC_CREATED, statusCodeOfCreateUser);
+            assertEquals(SC_OK, statusCodeOfDeleteUser);
+            assertTrue(isSuccess);
     }
 }

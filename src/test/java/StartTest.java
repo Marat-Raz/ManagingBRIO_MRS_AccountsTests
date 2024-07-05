@@ -5,6 +5,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,12 +22,14 @@ import java.time.Duration;
 import static pages.CommonLocatorsUrls.MAIN_PAGE_URL;
 
 public class StartTest {
-    User user;
-    UserClient userClient;
-    WebDriver driver;
-    static Process brioDocs = null;
-
+    static User user;
+    static UserClient userClient; // = null;
+    static WebDriver driver;
+    static Process brioDocsApi = null;
+    static ValidatableResponse response;
+    public static int id;
     @BeforeAll
+    @Step("Глобальные настройки и запуск Brio.Docs.Api.exe")
     public static void globalSetUp() {
         RestAssured.filters(
                 new RequestLoggingFilter(), new ResponseLoggingFilter(),
@@ -34,11 +37,15 @@ public class StartTest {
         ProcessBuilder pb = new ProcessBuilder("C:\\Program Files\\BRIO MRS\\BRIO MRS 2.x\\DocumentManagement\\Brio.Docs.Api.exe");
         pb.directory(new File("C:\\Program Files\\BRIO MRS\\BRIO MRS 2.x\\DocumentManagement"));
         try {
-            brioDocs = pb.start();
+            brioDocsApi = pb.start();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        user = UserGenerator.getUser();
+        userClient = new UserClient();
+        response = userClient.createUser(user);
+        id = response.extract().path("id");
     }
 
     @BeforeEach
@@ -49,13 +56,14 @@ public class StartTest {
         driver.get(MAIN_PAGE_URL);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        user = UserGenerator.getUser();
-        userClient = new UserClient();    }
+
+    }
 
     @AfterAll
-    @Step
+    @Step("Закрытие Brio.Docs.Api.exe")
     public static void closeBrioDocs() {
-        brioDocs.destroy();
+        userClient.deleteUser(id);
+        brioDocsApi.destroy();
     }
 
     @AfterEach

@@ -1,14 +1,10 @@
 package pages;
-
 import io.qameta.allure.Step;
-import usermodel.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-
 import static pages.CommonLocatorsUrls.*;
 
 public class AccountManagementPage {
@@ -48,6 +44,9 @@ public class AccountManagementPage {
     @Step("Находим пользователя в таблице пользователей по логину")
     public boolean findLogin(String login) {
     return driver.findElement(By.xpath("//tbody//td[text()='" + login + "']")).isDisplayed();
+    }
+    public void clickEdit(String login) {
+        driver.findElement(By.xpath(String.format("//tr[.//td='%s']//a[.='Удалить']", login))).click(); //" + login + "
     }
 
 }

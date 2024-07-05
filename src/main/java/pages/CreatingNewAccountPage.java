@@ -2,13 +2,12 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-import static org.openqa.selenium.Keys.ENTER;
 import static pages.CommonLocatorsUrls.*;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,10 +19,11 @@ import java.time.Duration;
 public class CreatingNewAccountPage {
     private final WebDriver driver;
 
+
     public CreatingNewAccountPage(WebDriver driver) {
         this.driver = driver;
     }
-    @Step("Открываем главную страницу")
+    @Step("Открываем страницу cсоздания пользователя")
     public void waitOpenPage() {
         (new WebDriverWait(driver, Duration.ofSeconds(3))).until(ExpectedConditions.urlToBe(CREATING_ACCOUNT_PAGE_URL));
     }
@@ -34,14 +34,10 @@ public class CreatingNewAccountPage {
     public void inputText(By input, String variableText) {
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(variableText);
-        //driver.findElement(input).sendKeys(ENTER);
+        driver.findElement(input).sendKeys(Keys.TAB);
     }
     @Step("Чтение текста из поля ввода")
     public String textFromInput(By input) {
-/*        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        WebElement inputElementJS = driver.findElement(input);
-        String valueUsingJS = (String) jsExecutor.executeScript("return arguments[0].value", inputElementJS);*/
-        // String attribute = driver.findElement(input).getAttribute("value");
         return driver.findElement(input).getAttribute("value");
     }
     @Step("Выбор элемента выпадающего списка")
@@ -72,17 +68,24 @@ public class CreatingNewAccountPage {
     }
     @Step("Поля ввода «Username» и «Password» под «Параметры аутентификации» видно?")
     public boolean inputBrioUsernameAndPasswordIsDisplayed() {
-//      boolean c = driver.findElement(INPUT_BRIO_USERNAME).isDisplayed()&driver.findElement(INPUT_BRIO_USERNAME).isDisplayed();
         return driver.findElement(INPUT_BRIO_USERNAME).isDisplayed()&driver.findElement(INPUT_BRIO_USERNAME).isDisplayed();
     }
     @Step("Появилась ошибка с текстом «The ... field is required.»")
-    public String alertIsDisplayed() {
+    public String alertIsDisplayedReturnString() {
         return driver.findElement(ALERT).getText();
     }
     @Step("Появилась кнопка закрыть «Х»")
     public boolean alertButtonCloseIsDisplayed() {
-        return driver.findElement(BUTTON_CLOSE).isDisplayed();
+        return driver.findElement(BUTTON_X).isDisplayed();
     }
+    public boolean alertIsNotDisplayed() {
+        return assertElementPresent(ALERT);
+    }
+
+    private boolean assertElementPresent(By alert) {
+        return false;
+    }
+
     @Step("Заполнение данных пользователя")
     public void InputAllText(User user) {
         selectText("Локальный");
@@ -96,11 +99,17 @@ public class CreatingNewAccountPage {
     }
     @Step("Нажать на кнопку «X»")
     public void clickButtonX() {
-        driver.findElement(BUTTON_CANCEL).click();
+        driver.findElement(BUTTON_X).click();
     }
-    @Step("Заполнение полей ввода на странице «Регистрация» и нажатие кнопки «Зарегистрироваться»")
+    @Step("Заполнение полей ввода на странице «Создание нового аккаунта» и нажатие кнопки «Создать»")
     public void enterRegistrationDataAndClickCreateButton(User user) {
         InputAllText(user);
         clickButtonCreate();
     }
+    @Step("Нажать на кнопку «Отмена»")
+    public void clickButtonCancel() {
+        driver.findElement(BUTTON_CANCEL).click();
+    }
 }
+
+
